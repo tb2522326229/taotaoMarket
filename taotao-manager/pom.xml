@@ -19,5 +19,8 @@
   <build/>
   <modules>
   	<module>taotao-manager-entity</module>
+  	<module>taotao-manager-dao</module>
+  	<module>taotao-manager-service</module>
+  	<module>taotao-manager-web</module>
   </modules>
 </project>
