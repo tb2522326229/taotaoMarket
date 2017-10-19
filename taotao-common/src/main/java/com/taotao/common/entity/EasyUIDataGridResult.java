@@ -1,4 +1,4 @@
-package com.taotao.common.pojo;
+package com.taotao.common.entity;
 
 import java.util.List;
 
