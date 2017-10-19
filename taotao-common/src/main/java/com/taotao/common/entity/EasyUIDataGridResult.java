@@ -7,14 +7,8 @@ import java.util.List;
  */
 public class EasyUIDataGridResult {
 
-	private long total;//总记录数
-	private List<?> rows;//每一页显示的内容的集合
-	
-	public EasyUIDataGridResult(long total, List<?> rows) {
-		this.total = total;
-		this.rows = rows;
-	}
-	
+	private long total;// 总记录数
+	private List<?> rows;
 	public long getTotal() {
 		return total;
 	}
@@ -27,6 +21,5 @@ public class EasyUIDataGridResult {
 	public void setRows(List<?> rows) {
 		this.rows = rows;
 	}
-	
 	
 }
