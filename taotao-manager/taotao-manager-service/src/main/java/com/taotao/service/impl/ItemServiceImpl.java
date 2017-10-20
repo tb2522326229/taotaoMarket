@@ -42,8 +42,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public EasyUIDataGridResult getItemList(int page, int rows) {
-		PageHelper.startPage(page, rows);
+	public EasyUIDataGridResult getItemList(int pageIndex, int pageSize) {
+		PageHelper.startPage(pageIndex, pageSize);
 		TbItemExample itemExample = new TbItemExample();
 		List<TbItem> list = tbItemMapper.selectByExample(itemExample);
 		PageInfo<TbItem> pageInfo = new PageInfo<TbItem>(list);

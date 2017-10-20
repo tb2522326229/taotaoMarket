@@ -9,6 +9,6 @@ public interface ItemService {
 	public TbItem getItemById(Long itemId);
 	
 	// 获取分页查询
-	public EasyUIDataGridResult getItemList(int page,int rows);
+	public EasyUIDataGridResult getItemList(int pageIndex,int pageSize);
 
 }
