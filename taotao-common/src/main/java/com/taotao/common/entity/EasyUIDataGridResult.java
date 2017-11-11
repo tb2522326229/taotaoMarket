@@ -8,7 +8,7 @@ import java.util.List;
 public class EasyUIDataGridResult {
 
 	private long total;// 总记录数
-	private List<?> rows;
+	private List<?> rows;// 返回的結果
 	public long getTotal() {
 		return total;
 	}
