@@ -13,6 +13,9 @@
         <dependent-module archiveName="taotao-manager-entity-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/taotao-manager-entity/taotao-manager-entity">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="fastdfs_client-1.25.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/fastdfs_client/fastdfs_client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="taotao-common-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/taotao-common/taotao-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
