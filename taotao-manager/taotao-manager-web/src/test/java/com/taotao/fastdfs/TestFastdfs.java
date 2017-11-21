@@ -7,6 +7,8 @@ import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 import org.junit.Test;
 
+import com.taotao.common.utils.FastDFSClient;
+
 public class TestFastdfs {
 	@Test
 	public void testUpload() throws Exception {
