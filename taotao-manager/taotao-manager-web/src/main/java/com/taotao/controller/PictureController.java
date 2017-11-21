@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.taotao.common.entity.PictureResult;
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.service.PictureService;
 
 @Controller
@@ -17,8 +18,9 @@ public class PictureController {
 	
 	@RequestMapping("/pic/upload")
 	@ResponseBody
-	public PictureResult uploadFile(MultipartFile uploadFile){
+	public String uploadFile(MultipartFile uploadFile){
 		PictureResult result = picService.uploadPic(uploadFile);
-		return result;
+		String jsonString = JsonUtils.objectToJson(result);
+		return jsonString;
 	}
 }
