@@ -14,7 +14,7 @@ import com.taotao.service.PictureService;
 @Service
 public class PictureServiceImpl implements PictureService {
 	@Value("${IMAGE_BASE_URL}")
-	String IMAGE_BASE_URL;
+	private String IMAGE_BASE_URL;
 
 	@Override
 	public PictureResult uploadPic(MultipartFile picFile) {
@@ -36,6 +36,7 @@ public class PictureServiceImpl implements PictureService {
 			String[] urls = fastdfs.uploadFile(picFile.getBytes(), extName);
 			System.out.println("urls: " + urls);
 			String url = IMAGE_BASE_URL;
+			// String url = "192.168.133.25";
 			for (int i = 0; i < urls.length; i++) {
 				url += urls[i];
 			}
