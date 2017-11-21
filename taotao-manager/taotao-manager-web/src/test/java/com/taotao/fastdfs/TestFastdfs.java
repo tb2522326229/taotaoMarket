@@ -29,6 +29,15 @@ public class TestFastdfs {
 		}
 	}
 
+	@Test
+	public void testFastDfsClient() throws Exception {
+		FastDFSClient fastDFSClient = new FastDFSClient(
+				"E:\\JAVA\\GitHub\\taotaoMarket\\taotao-manager\\taotao-manager-web\\src\\main\\resources\\properties\\Client.conf");
+		String[] string = fastDFSClient.uploadFile("F:\\壁纸\\测试图片1.jpg");
+		// 注意，你再上传一遍，刚才你上传的那个图片就已经丢了，它已经存在服务器上了，你再也访问不到了
+		for (String string2 : string) {
+			System.out.println(string2);
+		}
+	}
+
 }
-
-
