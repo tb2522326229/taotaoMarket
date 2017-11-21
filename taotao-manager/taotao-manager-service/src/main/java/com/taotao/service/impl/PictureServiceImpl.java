@@ -1,5 +1,6 @@
 package com.taotao.service.impl;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,13 +9,16 @@ import com.taotao.common.utils.FastDFSClient;
 import com.taotao.service.PictureService;
 
 /**
- *  
+ * 图片服务器上传功能的实现
  */
 @Service
 public class PictureServiceImpl implements PictureService {
+	@Value("${IMAGE_BASE_URL}")
+	String IMAGE_BASE_URL;
 
 	@Override
 	public PictureResult uploadPic(MultipartFile picFile) {
+
 		PictureResult result = new PictureResult();
 		// 判断图片是否为空
 		if (picFile.isEmpty()) {
@@ -31,7 +35,7 @@ public class PictureServiceImpl implements PictureService {
 			FastDFSClient fastdfs = new FastDFSClient("classpath:properties/Client.conf");
 			String[] urls = fastdfs.uploadFile(picFile.getBytes(), extName);
 			System.out.println("urls: " + urls);
-			String url = null;
+			String url = IMAGE_BASE_URL;
 			for (int i = 0; i < urls.length; i++) {
 				url += urls[i];
 			}
