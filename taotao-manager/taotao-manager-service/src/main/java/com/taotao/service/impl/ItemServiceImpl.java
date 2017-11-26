@@ -90,8 +90,8 @@ public class ItemServiceImpl implements ItemService {
 		itemParamItem.setParamData(itemParam);
 		itemParamItem.setCreated(date);
 		itemParamItem.setUpdated(date);
-		// 插入数据
 		itemParamItemMapper.insert(itemParamItem);
+		// 插入数据
 		return TaotaoResult.ok();
 
 	}
