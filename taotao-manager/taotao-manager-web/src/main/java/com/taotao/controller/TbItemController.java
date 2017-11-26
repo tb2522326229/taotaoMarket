@@ -23,18 +23,18 @@ public class TbItemController {
 		TbItem item = itemService.getItemById(itemId);
 		return item;
 	}
-	
+
 	@RequestMapping("/item/list")
 	@ResponseBody
-	public EasyUIDataGridResult getItemList(Integer page,Integer rows){
+	public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
 		EasyUIDataGridResult itemList = itemService.getItemList(page, rows);
 		return itemList;
 	}
-	
-	@RequestMapping(value = "/item/save",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/item/save", method = RequestMethod.POST)
 	@ResponseBody
-	public TaotaoResult createItem(TbItem item,String desc){
-		TaotaoResult result = itemService.createItem(item, desc);
+	public TaotaoResult createItem(TbItem item, String desc, String itemParams) {
+		TaotaoResult result = itemService.createItem(item, desc, itemParams);
 		return result;
 	}
 

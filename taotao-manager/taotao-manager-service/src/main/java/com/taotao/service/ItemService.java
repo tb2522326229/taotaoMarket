@@ -13,6 +13,6 @@ public interface ItemService {
 	public EasyUIDataGridResult getItemList(int pageIndex,int pageSize);
 	
 	// 新增商品
-	public TaotaoResult createItem(TbItem item,String desc);
+	public TaotaoResult createItem(TbItem item,String desc,String itemParam);
 
 }
