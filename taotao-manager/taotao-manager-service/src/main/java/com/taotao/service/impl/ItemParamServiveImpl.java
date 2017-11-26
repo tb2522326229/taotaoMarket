@@ -1,5 +1,6 @@
 package com.taotao.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,17 @@ public class ItemParamServiveImpl implements ItemParamServive {
 			TbItemParam tbItemParam = list.get(0);
 			return TaotaoResult.ok(tbItemParam);
 		}
+		return TaotaoResult.ok();
+	}
+
+	@Override
+	public TaotaoResult insertItemParamByCid(Long cid, String paramData) {
+		TbItemParam itParam = new TbItemParam();
+		itParam.setItemCatId(cid);
+		itParam.setParamData(paramData);
+		itParam.setCreated(new Date());
+		itParam.setUpdated(new Date());
+		itemParamMapper.insert(itParam);
 		return TaotaoResult.ok();
 	}
 
