@@ -25,7 +25,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 	public ItemCatResult getItemCatList() {
 		// 调用递归方法来查询商品分类列表
 		List catList = getItemCatList(0L);
-		//返回结果
+		// 返回结果
 		ItemCatResult result = new ItemCatResult();
 		result.setData(catList);
 		return result;
@@ -40,7 +40,12 @@ public class ItemCatServiceImpl implements ItemCatService {
 		// 执行查询
 		List<TbItemCat> list = itemCatMapper.selectByExample(example);
 		List resultList = new ArrayList<>();
+
+		int index = 0; // 设置一级节点下标
 		for (TbItemCat tbItemCat : list) {
+			if (index >= 14) {
+				break;
+			}
 			// 如果是父节点
 			if (tbItemCat.getIsParent()) {
 				CatgoryNode node = new CatgoryNode();
@@ -48,6 +53,8 @@ public class ItemCatServiceImpl implements ItemCatService {
 				// 如果当前节点为第一级节点
 				if (tbItemCat.getParentId() == 0) {
 					node.setName("<a href='/products/" + tbItemCat.getId() + ".html'>" + tbItemCat.getName() + "</a>");
+					// 第一个节点不能超过14个元素，index为计数器
+					index++;
 				} else {
 					node.setName(tbItemCat.getName());
 				}
