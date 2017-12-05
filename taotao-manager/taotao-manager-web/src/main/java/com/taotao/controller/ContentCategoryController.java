@@ -15,14 +15,11 @@ import com.taotao.service.ContentCategoryService;
 public class ContentCategoryController {
 	@Autowired
 	private ContentCategoryService contentCatgoryService;
-	
+
 	@RequestMapping("/list")
 	@ResponseBody
-	public List<EasyUITreeNode> getContentCatList(@RequestParam(value="id", defaultValue="0")Long parentId) {
+	public List<EasyUITreeNode> getContentCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId) {
 		List<EasyUITreeNode> list = contentCatgoryService.getContentCatList(parentId);
 		return list;
-		
 	}
 }
-
-

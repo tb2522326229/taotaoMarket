@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.taotao.common.entity.EasyUITreeNode;
 import com.taotao.entity.TbContentCategory;
@@ -18,6 +19,7 @@ import com.taotao.service.ContentCategoryService;
  * @author Lenovo
  *
  */
+@Service
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 	@Autowired
 	private TbContentCategoryMapper contentCategoryMapper;
