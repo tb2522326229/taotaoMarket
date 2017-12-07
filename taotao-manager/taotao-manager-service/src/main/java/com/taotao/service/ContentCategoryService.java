@@ -11,4 +11,7 @@ public interface ContentCategoryService {
 	
 	// 商城首页新增内容分类节点
 	public TaotaoResult insertCatgory(Long parentId, String name);
+	
+	// 修改重命名商城首页内容分类节点
+	public TaotaoResult updateCategory(Long id , String name);
 }

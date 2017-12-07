@@ -32,4 +32,11 @@ public class ContentCategoryController {
 		return result;
 	}
 
+	@RequestMapping("/update")
+	@ResponseBody
+	public TaotaoResult updateNode(Long id, String name) {
+		TaotaoResult category = contentCatgoryService.updateCategory(id, name);
+		return category;
+	}
+
 }
