@@ -23,7 +23,7 @@ public class ItemParamServiveImpl implements ItemParamServive {
 	private TbItemParamMapper itemParamMapper;
 
 	@Override
-	public EasyUIDataGridResult getItemList(int pageIndex, int pageSize) {
+	public EasyUIDataGridResult getItemParamList(int pageIndex, int pageSize) {
 		PageHelper.startPage(pageIndex, pageSize);
 		TbItemParamExample itemParamExample = new TbItemParamExample();
 		List<TbItemParam> list = itemParamMapper.selectByExample(itemParamExample);

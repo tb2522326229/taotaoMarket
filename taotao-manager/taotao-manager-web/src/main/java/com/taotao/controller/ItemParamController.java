@@ -19,9 +19,9 @@ public class ItemParamController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EasyUIDataGridResult getParamList(Integer page,Integer rows){
-		EasyUIDataGridResult itemList = itemParamService.getItemList(page,rows);
-		return itemList;
+	public EasyUIDataGridResult getItemParamList(Integer page,Integer rows){
+		EasyUIDataGridResult itemParamList = itemParamService.getItemParamList(page,rows);
+		return itemParamList;
 	}
 	
 	@RequestMapping("/query/itemcatid/{cid}")
