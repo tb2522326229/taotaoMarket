@@ -2,21 +2,41 @@ package com.taotao.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.entity.EasyUIDataGridResult;
+import com.taotao.common.utils.TaotaoResult;
+import com.taotao.entity.TbContent;
 import com.taotao.service.ContentService;
 
 @Controller
-@RequestMapping("/content/query")
+@RequestMapping("/content")
 public class ContentController {
 	@Autowired
 	private ContentService contentService;
-	@RequestMapping("/list")
+	
+	/*@RequestMapping("/query/list")
 	@ResponseBody
 	public EasyUIDataGridResult getContentList(Integer page,Integer rows){
+		System.out.println("进入了controller");
 		EasyUIDataGridResult result = contentService.getContentList(page, rows);
 		return result;
+	}*/
+	
+	@RequestMapping("/query/list/{categoryId}")
+	@ResponseBody
+	public EasyUIDataGridResult getContentById(@PathVariable Long categoryId,Integer page, Integer rows){
+		EasyUIDataGridResult content = contentService.getContentById(categoryId,page,rows);
+		return content;
 	}
+	
+	@RequestMapping("/save")
+	@ResponseBody
+	public TaotaoResult insertContent(TbContent content) {
+		TaotaoResult result = contentService.insertContent(content);
+		return result;
+	}
+
 }
