@@ -50,8 +50,8 @@ public class PictureServiceImpl implements PictureService {
 					url += urls[i];
 				}
 			}
-			System.out.println("url: " + url);
 			result.setError(0);
+			result.setUrl(url);
 
 		} catch (Exception e) {
 			e.printStackTrace();
