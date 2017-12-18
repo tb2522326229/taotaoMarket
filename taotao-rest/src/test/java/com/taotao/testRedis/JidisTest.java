@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.taotao.rest.component.JedisClient;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
@@ -89,6 +93,17 @@ public class JidisTest {
 			//系统关闭时关闭连接池
 			jedisPool.close();
 			
+		}
+		@Test
+		public void testJedisClientSpring() throws Exception {
+			//创建一个spring容器
+			ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+			//从容器中获得JedisClient对象
+			JedisClient jedisClient = applicationContext.getBean(JedisClient.class);
+			//jedisClient操作redis
+			jedisClient.set("cliet1", "1000");
+			String string = jedisClient.get("cliet1");
+			System.out.println(string);
 		}
 
 }
