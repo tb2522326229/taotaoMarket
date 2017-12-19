@@ -3,14 +3,18 @@ package com.taotao.rest.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.taotao.common.utils.JsonUtils;
+import com.taotao.common.utils.TaotaoResult;
 import com.taotao.entity.TbItemCat;
 import com.taotao.entity.TbItemCatExample;
 import com.taotao.entity.TbItemCatExample.Criteria;
-import com.taotao.entity.TbItemExample;
 import com.taotao.mapper.TbItemCatMapper;
+import com.taotao.rest.component.JedisClient;
 import com.taotao.rest.entity.CatgoryNode;
 import com.taotao.rest.entity.ItemCatResult;
 import com.taotao.rest.service.ItemCatService;
@@ -19,7 +23,10 @@ import com.taotao.rest.service.ItemCatService;
 public class ItemCatServiceImpl implements ItemCatService {
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
-
+	@Autowired
+	private JedisClient jedisClient;
+	@Value("${REDIS_CONTENT_KEY}")
+	private String REDIS_CONTENT_KEY;
 	// 查询商品种类
 	@Override
 	public ItemCatResult getItemCatList() {
@@ -30,9 +37,22 @@ public class ItemCatServiceImpl implements ItemCatService {
 		result.setData(catList);
 		return result;
 	}
-
+	
 	// 递归方法通过parent_id查询商品分类
 	public List getItemCatList(Long parentId) {
+		// 添加缓存
+		// 查询数据库之前先查询缓存，如果有直接返回
+		try {
+			// 从redis中取缓存数据
+			String json = jedisClient.hget(REDIS_CONTENT_KEY, parentId + "");
+			if (!StringUtils.isBlank(json)) {
+				// 把json转换成List
+				List<TbItemCat> list = JsonUtils.jsonToList(json, TbItemCat.class);
+				return list;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// 根据parentId查询列表
 		TbItemCatExample example = new TbItemCatExample();
 		Criteria criteria = example.createCriteria();
@@ -67,6 +87,21 @@ public class ItemCatServiceImpl implements ItemCatService {
 				resultList.add(item);
 			}
 		}
+		// 返回结果之前，向缓存中添加数据
+		try {
+			// 为了规范key可以使用hash
+			// 定义一个保存内容的key，hash中每个项就是cid
+			// value是list，需要把list转换成json数据。
+			jedisClient.hset(REDIS_CONTENT_KEY, parentId + "", JsonUtils.objectToJson(list));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return resultList;
+	}
+	
+	@Override
+	public TaotaoResult syncContent(Long parentId) {
+		jedisClient.hdel(REDIS_CONTENT_KEY, parentId + "");
+		return TaotaoResult.ok();
 	}
 }
