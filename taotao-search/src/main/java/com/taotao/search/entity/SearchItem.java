@@ -4,7 +4,7 @@ package com.taotao.search.entity;
  * 搜索商品结果中商品pojo
  */
 public class SearchItem {
-	private long id;
+	private String id;
 	private String title;
 	private String sell_point;
 	private long price;
@@ -20,12 +20,12 @@ public class SearchItem {
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
 	}
-
-	public long getId() {
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
