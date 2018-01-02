@@ -19,11 +19,11 @@ public class SearchController {
 	@RequestMapping("/q")
 	@ResponseBody
 	public TaotaoResult search(@RequestParam(defaultValue = "") String keyword,
-			@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "30") Integer rows) {
+			@RequestParam(defaultValue = "1") Integer pageIndex, @RequestParam(defaultValue = "30") Integer pageSize) {
 		try {
 			// 转换字符集
 			keyword = new String(keyword.getBytes("iso8859-1"), "utf-8");
-			SearchResult searchResult = searchService.search(keyword, page, rows);
+			SearchResult searchResult = searchService.search(keyword, pageIndex, pageSize);
 			return TaotaoResult.ok(searchResult);
 		} catch (Exception e) {
 			e.printStackTrace();
