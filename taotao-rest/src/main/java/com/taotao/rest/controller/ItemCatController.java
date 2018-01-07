@@ -51,7 +51,7 @@ public class ItemCatController {
 			return mappingJacksonValue;
 		}
 		// 后台修改了parentId对应的内容后应该进行的操作
-		@RequestMapping("/sync/{parentId}")
+		/*@RequestMapping("/sync/{parentId}")
 		@ResponseBody
 		public TaotaoResult sysncContent(@PathVariable Long parentId) {
 			try {
@@ -61,6 +61,6 @@ public class ItemCatController {
 				e.printStackTrace();
 				return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
 			}
-		}
+		}*/
 }
 

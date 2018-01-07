@@ -7,5 +7,5 @@ public interface ItemCatService {
 	// 
 	public ItemCatResult getItemCatList();
 
-	TaotaoResult syncContent(Long parentId);
+	// TaotaoResult syncContent(Long parentId);
 }

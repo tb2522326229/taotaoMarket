@@ -25,8 +25,8 @@ public class ItemCatServiceImpl implements ItemCatService {
 	private TbItemCatMapper itemCatMapper;
 	@Autowired
 	private JedisClient jedisClient;
-	@Value("${REDIS_CONTENT_KEY}")
-	private String REDIS_CONTENT_KEY;
+	@Value("${REDIS_ITEM_KEY}")
+	private String REDIS_ITEM_KEY;
 	// 查询商品种类
 	@Override
 	public ItemCatResult getItemCatList() {
@@ -39,12 +39,12 @@ public class ItemCatServiceImpl implements ItemCatService {
 	}
 	
 	// 递归方法通过parent_id查询商品分类
-	public List getItemCatList(Long parentId) {
+	public List<TbItemCat> getItemCatList(Long parentId) {
 		// 添加缓存
 		// 查询数据库之前先查询缓存，如果有直接返回
-		try {
+		/*try {
 			// 从redis中取缓存数据
-			String json = jedisClient.hget(REDIS_CONTENT_KEY, parentId + "");
+			String json = jedisClient.hget(REDIS_ITEM_KEY, parentId + "");
 			if (!StringUtils.isBlank(json)) {
 				// 把json转换成List
 				List<TbItemCat> list = JsonUtils.jsonToList(json, TbItemCat.class);
@@ -52,7 +52,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		// 根据parentId查询列表
 		TbItemCatExample example = new TbItemCatExample();
 		Criteria criteria = example.createCriteria();
@@ -92,16 +92,16 @@ public class ItemCatServiceImpl implements ItemCatService {
 			// 为了规范key可以使用hash
 			// 定义一个保存内容的key，hash中每个项就是cid
 			// value是list，需要把list转换成json数据。
-			jedisClient.hset(REDIS_CONTENT_KEY, parentId + "", JsonUtils.objectToJson(list));
+			jedisClient.hset(REDIS_ITEM_KEY, parentId + "", JsonUtils.objectToJson(list));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return resultList;
 	}
 	
-	@Override
+	/*@Override
 	public TaotaoResult syncContent(Long parentId) {
-		jedisClient.hdel(REDIS_CONTENT_KEY, parentId + "");
+		jedisClient.hdel(REDIS_ITEM_KEY, parentId + "");
 		return TaotaoResult.ok();
-	}
+	}*/
 }

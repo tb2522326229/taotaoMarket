@@ -1,7 +1,6 @@
 package com.taotao.entity;
 
 import java.util.Date;
-
 public class TbItemCat {
     private Long id;
 
